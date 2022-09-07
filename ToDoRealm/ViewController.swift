@@ -17,6 +17,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var contentText: Results<Post>!
     var dateText: Results<Post>!
     
+//    var titleText = [String]()
+//    var contentText = [String]()
+//    var dateText = [String]()
+    
     let realm = try! Realm()
 
     override func viewDidLoad() {
@@ -30,6 +34,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             titleTable.dataSource = self
             titleTable.delegate = self
         }
+        
+        //タップ選択できるように
+        titleTable.allowsSelectionDuringEditing = true
+        
+//        titleTable.isEditing = true
         
         //realmのデータ取得
         self.titleText = realm.objects(Post.self)
@@ -78,7 +87,42 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
          // タップされたセルの行番号を出力
          print("\(indexPath.row)番目の行が選択されました。")
      }
+    
+    @IBAction func edit() {
+        //編集モードをオンに
+        titleTable.isEditing = true
+    }
+    
+    //並べ替えを許可
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        //Results型だとremoveとinsertが使えないのでArray型に変換
+//        let titleText = Array(titleText)
+        //varにしないとダメだった
+        var titleTextRow = Array(titleText)
+        //元はsourceIndexPath
+        let movedText = titleText[sourceIndexPath.row]
+//        let itemToMove = titleText.remove(at: sourceIndexPath.row)
+        titleTextRow.remove(at: sourceIndexPath.row)
+//        titleText.insert(itemToMove, at: destinationIndexPath.row)
+        //遷移先はdestinationIndexPath(引数見ればわかる)
+        titleTextRow.insert(movedText, at: destinationIndexPath.row)
+//        let movedText = titleText[sourceIndexPath.row]
+//        titleText.removeAtIndex(sourceIndexPath)
+//        titleText.insert(movedText, at: destinationIndexPath.row)
+    }
 
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
     
 
 }

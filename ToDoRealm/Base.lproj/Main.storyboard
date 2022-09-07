@@ -36,6 +36,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Todo" id="I04-gp-zV9">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="Crs-Ji-avA">
+                            <connections>
+                                <action selector="edit" destination="BYZ-38-t0r" id="5TO-Iy-h1L"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="7dL-sP-7aS">
                             <connections>
                                 <segue destination="SNd-KD-WjV" kind="show" id="qXv-C9-NWr"/>

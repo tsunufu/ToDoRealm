@@ -19,6 +19,10 @@ class PostViewController: UIViewController {
     var contentText: Results<Post>!
     var dateText: Results<Post>!
     
+//    var titleText = [String]()
+//    var contentText = [String]()
+//    var dateText = [String]()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +36,7 @@ class PostViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-//    func read() -> Post? {
-//        return realm.objects(Post.self).first
-//    }
+
     
     @IBAction func save() {
         //Postクラスのインスタンス作成
