@@ -25,6 +25,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let realm = try! Realm()
         
+        //nil回避
         if let titleTable = titleTable {
             titleTable.dataSource = self
             titleTable.delegate = self
@@ -39,6 +40,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
      
+        //nil回避
         if titleTable != nil {
             self.titleTable.reloadData()
         }
@@ -58,6 +60,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return cell
         
+    }
+    
+    // スワイプしてセルを削除
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        // Realmのデータ削除
+        try! realm.write {
+            realm.delete(self.titleText[indexPath.row])
+            //更新をかける（かけないと消しても画面遷移しないとそのまま）
+            self.titleTable.reloadData()
+        }
     }
 
     
