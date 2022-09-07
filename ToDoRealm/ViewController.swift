@@ -68,10 +68,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Realmのデータ削除
         try! realm.write {
             realm.delete(self.titleText[indexPath.row])
-            //更新をかける（かけないと消しても画面遷移しないとそのまま）
-            self.titleTable.reloadData()
         }
+        
+        self.titleTable.deleteRows(at: [indexPath], with: .automatic)
     }
+    //indexpath.rowの取得がおかしくなった時の確認用
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  
+         // タップされたセルの行番号を出力
+         print("\(indexPath.row)番目の行が選択されました。")
+     }
 
     
 
