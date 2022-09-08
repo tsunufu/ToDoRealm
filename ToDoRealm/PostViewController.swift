@@ -37,10 +37,7 @@ class PostViewController: UIViewController {
         
         // ピッカー設定
         datePicker.preferredDatePickerStyle = .wheels
-//        datePicker.datePickerMode = UIDatePicker.Mode.dateAndTime
-        datePicker.timeZone = NSTimeZone.local
-        datePicker.locale = Locale.current
-        dateTextField.inputView = datePicker
+        datePicker.datePickerMode = .date //これがないと時間も表示されてしまう！！
         
         // 決定バーの生成
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 35))
@@ -78,21 +75,13 @@ class PostViewController: UIViewController {
         
     }
     
-//    @IBAction func changeDate(sender: UIDatePicker) {
-//
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy/MM/dd"
-//        dateTextField.text = formatter.string(from: sender.date)
-//
-//    }
-    
     // 決定ボタン押下
     @objc func done() {
         dateTextField.endEditing(true)
         
         // 日付のフォーマット
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
+        formatter.dateFormat = "yyyy年MM月dd日"
         dateTextField.text = "\(formatter.string(from: Date()))"
     }
     
