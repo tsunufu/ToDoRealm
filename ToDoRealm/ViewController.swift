@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var contentText: Results<Post>!
     var dateText: Results<Post>!
     
+    
 //    var titleText = [String]()
 //    var contentText = [String]()
 //    var dateText = [String]()
@@ -40,7 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
 //        titleTable.isEditing = true
         
-        //realmのデータ取得
+        //realmのデータ取得．後で整理
         self.titleText = realm.objects(Post.self)
         self.contentText = realm.objects(Post.self)
         self.dateText = realm.objects(Post.self)
