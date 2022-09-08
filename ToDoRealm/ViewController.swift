@@ -17,6 +17,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var contentText: Results<Post>!
     var dateText: Results<Post>!
     
+    @IBOutlet var editButton: UIBarButtonItem!
+    @IBOutlet var doneButton: UIBarButtonItem!
+    
     
 //    var titleText = [String]()
 //    var contentText = [String]()
@@ -37,7 +40,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         //タップ選択できるように
-        titleTable.allowsSelectionDuringEditing = true
+//        titleTable.allowsSelectionDuringEditing = true
         
 //        titleTable.isEditing = true
         
@@ -45,6 +48,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.titleText = realm.objects(Post.self)
         self.contentText = realm.objects(Post.self)
         self.dateText = realm.objects(Post.self)
+        
+        //最初は完了ボタン非表示
+        self.doneButton.isEnabled = false
+        self.doneButton.tintColor = UIColor.clear
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +71,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let post: Post = self.titleText[indexPath.row]
+        
+        // TableViewCellの中に配置したLabelを取得する
+        //Labelを二つ置くと編集モードにしたときにレイアウトが崩れる
+//        let label1 = cell.contentView.viewWithTag(1) as! UILabel
+//        let label2 = cell.contentView.viewWithTag(2) as! UILabel
+//        label1.text = post.title
+//        label2.text = post.date
+        
         cell.textLabel?.text = post.title
+        cell.detailTextLabel?.text = post.date
+
+        
+
+        
         
 //        cell.textLabel?.text = "テスト"
         
@@ -84,7 +104,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     //indexpath.rowの取得がおかしくなった時の確認用
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-  
+
          // タップされたセルの行番号を出力
          print("\(indexPath.row)番目の行が選択されました。")
      }
@@ -92,17 +112,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func edit() {
         //編集モードをオンに
         titleTable.isEditing = true
+        self.editButton.isEnabled = false
+        self.editButton.tintColor = UIColor.clear
+        self.doneButton.isEnabled = true
+        self.doneButton.tintColor = UIColor.init(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
     }
     
+    @IBAction func done() {
+        //編集モードをオフに
+        titleTable.isEditing = false
+        self.doneButton.isEnabled = false
+        self.doneButton.tintColor = UIColor.clear
+        self.editButton.isEnabled = true
+        self.editButton.tintColor = UIColor.init(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+        
+        
+    }
+
     //並べ替えを許可
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .none
-    }
-    
+//以下のメソッドがあるとスワイプアクションが呼び出されない！
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        return .none
+//    }
+
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         //Results型だとremoveとinsertが使えないのでArray型に変換
 //        let titleText = Array(titleText)
@@ -123,7 +158,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
     }
-    
+
     
 
 }

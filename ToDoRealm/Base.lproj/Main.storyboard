@@ -21,12 +21,28 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="65" id="ACT-HP-Wdo">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="65"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="jU3-qX-iA3" detailTextLabel="mu0-SY-giw" rowHeight="80" style="IBUITableViewCellStyleSubtitle" id="ACT-HP-Wdo">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ACT-HP-Wdo" id="yAx-aU-LTD">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jU3-qX-iA3">
+                                                    <rect key="frame" x="20" y="24" width="25" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mu0-SY-giw">
+                                                    <rect key="frame" x="20" y="40.5" width="40.5" height="13.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -36,11 +52,18 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Todo" id="I04-gp-zV9">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="Crs-Ji-avA">
-                            <connections>
-                                <action selector="edit" destination="BYZ-38-t0r" id="5TO-Iy-h1L"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="edit" id="Crs-Ji-avA">
+                                <connections>
+                                    <action selector="edit" destination="BYZ-38-t0r" id="5TO-Iy-h1L"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="done" id="WKu-8S-p4n">
+                                <connections>
+                                    <action selector="done" destination="BYZ-38-t0r" id="zCf-fK-zZZ"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="7dL-sP-7aS">
                             <connections>
                                 <segue destination="SNd-KD-WjV" kind="show" id="qXv-C9-NWr"/>
@@ -48,6 +71,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="doneButton" destination="WKu-8S-p4n" id="DO5-YE-Kf7"/>
+                        <outlet property="editButton" destination="Crs-Ji-avA" id="b1a-MR-qeB"/>
                         <outlet property="titleTable" destination="rYZ-zv-LTV" id="ntG-WL-xnn"/>
                     </connections>
                 </viewController>

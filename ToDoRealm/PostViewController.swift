@@ -81,7 +81,7 @@ class PostViewController: UIViewController {
         
         // 日付のフォーマット
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy年MM月dd日"
+        formatter.dateFormat = "yyyy/MM/dd"
         dateTextField.text = "\(formatter.string(from: Date()))"
     }
     
