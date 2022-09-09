@@ -11,7 +11,7 @@ import RealmSwift
 class PostViewController: UIViewController {
     
     @IBOutlet var titleTextField: UITextField!
-    @IBOutlet var contentTextField: UITextField!
+    @IBOutlet var contentTextField: UITextView!
     @IBOutlet var dateTextField: UITextField!
     
     var datePicker: UIDatePicker = UIDatePicker()
@@ -48,6 +48,15 @@ class PostViewController: UIViewController {
         // インプットビュー設定
         dateTextField.inputView = datePicker
         dateTextField.inputAccessoryView = toolbar
+        
+        //TextViewの形状設定
+        //色をTextFieldに合わせる
+        contentTextField.layer.borderColor = CGColor.init(red: 204.0/255.0, green:204.0/255.0, blue:204.0/255.0, alpha:1.0)
+        //枠の太さ
+        contentTextField.layer.borderWidth = 1.0
+        //枠の角丸
+        contentTextField.layer.cornerRadius = 5.0
+        contentTextField.layer.masksToBounds = true
         
         // Do any additional setup after loading the view.
     }
