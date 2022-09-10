@@ -8,11 +8,10 @@
 import UIKit
 import RealmSwift
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     
     @IBOutlet weak var titleTable: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     
     var titleText: Results<Post>!
     var contentText: Results<Post>!
@@ -40,7 +39,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             titleTable.delegate = self
         }
         
-        searchBar.delegate = self
         
         //タップ選択できるように
 //        titleTable.allowsSelectionDuringEditing = true
@@ -55,6 +53,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //最初は完了ボタン非表示
         self.doneButton.isEnabled = false
         self.doneButton.tintColor = UIColor.clear
+        
+        editButton.title = "編集"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,23 +114,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func edit() {
         //編集モードをオンに
-        isEditing = true
-        self.editButton.isEnabled = false
-        self.editButton.tintColor = UIColor.clear
-        self.doneButton.isEnabled = true
-        self.doneButton.tintColor = UIColor.init(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+        if titleTable.isEditing == false {
+            titleTable.isEditing = true
+            editButton.title = "完了"
+        } else {
+            titleTable.isEditing = false
+            editButton.title = "編集"
+        }
+       
     }
     
-    @IBAction func done() {
-        //編集モードをオフに
-        titleTable.isEditing = false
-        self.doneButton.isEnabled = false
-        self.doneButton.tintColor = UIColor.clear
-        self.editButton.isEnabled = true
-        self.editButton.tintColor = UIColor.init(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
-        
-        
-    }
+
 
     //並べ替えを許可
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
