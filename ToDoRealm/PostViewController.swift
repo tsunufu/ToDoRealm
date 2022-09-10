@@ -82,6 +82,8 @@ class PostViewController: UIViewController {
         contentTextField.text = ""
         dateTextField.text = ""
         
+        self.navigationController?.popToRootViewController(animated: true)
+        
     }
     
     // 決定ボタン押下
@@ -91,7 +93,9 @@ class PostViewController: UIViewController {
         // 日付のフォーマット
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
-        dateTextField.text = "\(formatter.string(from: Date()))"
+       // dateTextField.text = "\(formatter.string(from: Date()))"
+        //Date()だと今日の日付，datePicker.dateで選択した日付を持ってくる
+        dateTextField.text = "\(formatter.string(from: datePicker.date))"
     }
     
     

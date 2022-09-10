@@ -8,10 +8,11 @@
 import UIKit
 import RealmSwift
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     
     @IBOutlet weak var titleTable: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var titleText: Results<Post>!
     var contentText: Results<Post>!
@@ -38,6 +39,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             titleTable.dataSource = self
             titleTable.delegate = self
         }
+        
+        searchBar.delegate = self
         
         //タップ選択できるように
 //        titleTable.allowsSelectionDuringEditing = true
@@ -111,7 +114,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func edit() {
         //編集モードをオンに
-        titleTable.isEditing = true
+        isEditing = true
         self.editButton.isEnabled = false
         self.editButton.tintColor = UIColor.clear
         self.doneButton.isEnabled = true
@@ -158,6 +161,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
     }
+    /*
+    検索機能
+    //文字列の取得
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+
+        var titleTextRow = Array(titleText)
+        print(titleText[1])
+        print(titleTextRow[1])
+        if let searchText = searchBar.text {
+            print(searchText) //文字列が出力テスト
+//            if searchText == "" {
+//
+//            }
+//            else {
+//                for data in titleTextRow {                    if data.containString(searchBar.text!) {
+//
+//                   }
+//                }
+//            }
+        }
+    }
+     */
+    
 
     
 
